@@ -1,2 +1,2 @@
 SECRET_KEY="niyin"
-key="fdsfbnk3r"
+keys="fdsfbnk3r"
