@@ -1,0 +1,2 @@
+SECRET_KEY="niyin"
+key="fdsfbnk3r"
