@@ -1,0 +1,5 @@
+fileignoreconfig:
+- filename: movie-crud-flask
+  checksum: 4c06592a21b48307048dc2d307ac87152edfbe4688d350e72e9eeb83fe775f4f
+- filename: sonar-project.properties
+  checksum: 137d03f312b7c04e26b39a10be3768a87810ff36658c1866ee64db001a3a8aea
