@@ -1,5 +1,11 @@
 fileignoreconfig:
+- filename: app/app.py
+  checksum: cb71a33e6f24661b3beabc68de54ee020d27155d712f27c73cf2d12937813cdb
+- filename: app/static/loader.js
+  checksum: 5184b627a7ffc4d624e6214e45be96b0341f817ea907e4a226a6e30e380932e6
 - filename: movie-crud-flask
   checksum: 4c06592a21b48307048dc2d307ac87152edfbe4688d350e72e9eeb83fe775f4f
 - filename: sonar-project.properties
   checksum: 137d03f312b7c04e26b39a10be3768a87810ff36658c1866ee64db001a3a8aea
+- filename: tests/e2e_zap.py
+  checksum: bc669d6166db995817552b9d568540b9a50d0eab3784c3e38479fafc91613d54
