@@ -1,5 +1,0 @@
-SECRET_KEY="niyin"
-keys="fdsfbnk3r"
-
-ACCESS_ID = '5QP4EYGRQRBHONZNGL2L'
-SECRET_KEY = 'mucbGZjCeUia0L4b9u//DCCEn7XJ/Ix6BNuq2Q+fy+0'
