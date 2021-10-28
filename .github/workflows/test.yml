@@ -1,7 +1,7 @@
 name: Continuous Integration Workflow
 on: [push, pull_request]
 jobs:
-  build:
+  build_prod:
     name: Build
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
@@ -9,3 +9,11 @@ jobs:
       - name: Install yarn
         uses: actions/checkout@v1
       - run: echo Hello World Master Branch
+  buidl_dev:
+    name: Builds
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop'}}
+    steps:
+      - name: Install yarn
+        uses: actions/checkout@v1
+      - run: echo Hello World Hotfix Branch
