@@ -1,13 +1,9 @@
 jobs:
   build:
     name: Build, Test, Pack, Push
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     env:
       PUSH_PACKAGES: ${{ github.event_name == 'push' && github.ref == 'refs/heads/hotfix' }}
     steps:
-      - name: Step 1
-        if: ${{ env.PUSH_PACKAGES }}
-        run: echo Step 2 running based on PUSH_PACKAGES value of $PUSH_PACKAGES
-      - name: Step 2
-        if: ${{ env.PUSH_PACKAGES }}
-        run: echo Step 2 running based on PUSH_PACKAGES value of $PUSH_PACKAGES
+      - name: Install yarn
+        run: npm install -g yarn
