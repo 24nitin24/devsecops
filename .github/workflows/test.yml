@@ -2,8 +2,7 @@ jobs:
   build:
     name: Build, Test, Pack, Push
     runs-on: ubuntu-latest
-    env:
-      PUSH_PACKAGES: ${{ github.event_name == 'push' && github.ref == 'refs/heads/hotfix' }}
     steps:
       - name: Install yarn
         run: npm install -g yarn
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/hotf
