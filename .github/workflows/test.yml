@@ -5,4 +5,4 @@ jobs:
     steps:
       - name: Install yarn
         run: npm install -g yarn
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/hotf
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/hotfix'}}
