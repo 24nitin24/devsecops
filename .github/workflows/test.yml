@@ -4,8 +4,9 @@ jobs:
   build:
     name: Build, Test, Pack, Push
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/masters'}}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
     steps:
       - name: Install yarn
         run: npm install -g yarn
+      - run: echo Hello World
  
