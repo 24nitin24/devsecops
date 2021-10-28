@@ -9,12 +9,3 @@ jobs:
       - name: Install yarn
         uses: actions/checkout@v1
       - run: echo Hello World Master Branch
-
-  test:
-    name: Build, Test, Pack, Push
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/hotfix'}}
-    steps:
-      - name: Install yarns
-        uses: actions/checkout@v1
-      - run: echo Hello World hotfix Branch
