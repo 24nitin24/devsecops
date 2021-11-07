@@ -21,7 +21,6 @@ jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
-    if: ${{needs.build_dev.outputs.status=='success' || needs.build_prod.outputs.status=='success'}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -33,6 +32,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
+          run: echo ${{needs.build_dev.outputs.status=='success' || needs.build_prod.outputs.status=='success'}}
           body: |
             Changes in this Release
             - First Change
