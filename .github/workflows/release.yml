@@ -21,7 +21,7 @@ jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
-    if: ${{needs.build_dev.outputs=='success' || needs.build_prod.outputs=='success'}}
+    if: ${{needs.build_dev.outputs.status=='success' || needs.build_prod.outputs.status=='success'}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
