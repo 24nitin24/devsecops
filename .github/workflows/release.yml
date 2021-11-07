@@ -20,4 +20,4 @@ jobs:
   job2:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{needs.build_dev.outputs}} ${{needs.build_prod.outputs}}
+      - run: echo ${{needs.build_dev.outputs=='success'}} && ${{needs.build_prod.outputs='success'}}
