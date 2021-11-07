@@ -17,7 +17,25 @@ jobs:
       - name: Install yarn
         uses: actions/checkout@v1
       - run: echo Hello World Hotfix Branch
-  job2:
+
+  release:
+    name: Create Release
+    if: ${{needs.build_dev.outputs=='success' || needs.build_prod.outputs=='success'}}
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{needs.build_dev.outputs=='success' && needs.build_prod.outputs=='success'}}
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
