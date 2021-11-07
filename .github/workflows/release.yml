@@ -1,4 +1,4 @@
-name: Continuous Integration Workflow
+name: Continuous Integration 
 on: [push, pull_request]
 jobs:
   build_prod:
@@ -7,6 +7,7 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
     steps:
       - name: Install yarn
+        id: build_prod
         uses: actions/checkout@v1
       - run: echo Hello World Master Branch
   build_dev:
@@ -15,6 +16,7 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/hotfix'}}
     steps:
       - name: Install yarn
+        id: build_dev
         uses: actions/checkout@v1
       - run: echo Hello World Hotfix Branch
 
