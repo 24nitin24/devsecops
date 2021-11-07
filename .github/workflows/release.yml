@@ -1,10 +1,28 @@
-on: push
-
-name: Create Release
-
+name: Continuous Integration Workflow
+on: [push, pull_request]
 jobs:
-  build:
+  build_prod:
+    name: Build_Prod
+    id: build_prod
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
+    steps:
+      - name: Install yarn
+        uses: actions/checkout@v1
+      - run: echo Hello World Master Branch
+  buidl_dev:
+    name: Build_Dev
+    id: build_dev
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/hotfix'}}
+    steps:
+      - name: Install yarn
+        uses: actions/checkout@v1
+      - run: echo Hello World Hotfix Branch
+
+  release:
     name: Create Release
+    if: ${{ steps.build_prod.outputs.conclusion == 'success' || steps.build_dev.outputs.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -23,4 +41,3 @@ jobs:
             - Second Change
           draft: false
           prerelease: false
-
