@@ -1,7 +1,7 @@
 ---
 name: "tagged-release"
 
-on:push
+on: push
 
 jobs:
   tagged-release:
