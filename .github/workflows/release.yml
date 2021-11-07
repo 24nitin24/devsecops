@@ -7,7 +7,6 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'}}
     steps:
       - name: Install yarn
-        id: build_prod
         uses: actions/checkout@v1
       - run: echo Hello World Master Branch
   build_dev:
@@ -16,28 +15,10 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/hotfix'}}
     steps:
       - name: Install yarn
-        id: build_dev
         uses: actions/checkout@v1
       - run: echo Hello World Hotfix Branch
-
-  release:
-    name: Create Release
-    if: ${{ steps.build_prod.outputs.conclusion == 'success' || steps.build_dev.outputs.conclusion == 'success' }}
+  job2:
     runs-on: ubuntu-latest
+    needs: job1
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
+      - run: echo ${{needs.build_dev.outputs}} ${{needs.build_prod.outputs}}
