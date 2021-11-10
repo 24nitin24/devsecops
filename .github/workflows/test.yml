@@ -4,12 +4,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get tag
-        id: tag
-        uses: dawidd6/action-get-tag@v1
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          # Optionally strip `v` prefix
-          strip_v: true
-      - name: Use tag
-        run: echo ${{steps.tag.outputs.tag}}
+          ref: ${{ github.event.release.tag_name }}
+      - name: Install deps and build
+        run: npm ci && npm run build
+      - uses: JasonEtco/build-and-tag-action@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
 
