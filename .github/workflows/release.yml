@@ -23,19 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_prod
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Extract release notes
-        id: extract-release-notes
-        uses: ffurrer2/extract-release-notes@v1
-      - name: Create release
-        uses: actions/create-release@v1
+      - uses: actions/checkout@master
+      - name: Create GitHub release
+        uses: Roang-zero1/github-create-release-action@master
+        with:
+          version_regex: '^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+'
+          update_existing: 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          changelog_file: CHANGELOG.md
-          draft: false
-          prerelease: false
-          body: ${{ steps.extract-release-notes.outputs.release_notes }}
