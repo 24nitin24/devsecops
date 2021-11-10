@@ -23,18 +23,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_prod
     steps:
-      - uses: actions/checkout@master
-      - name: Create GitHub release
-        uses: Roang-zero1/github-create-release-action@master
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Extract release notes
+        id: extract-release-notes
+        uses: ffurrer2/extract-release-notes@v1
+      - name: Create release
+        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          version_regex: '^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+'
-          update_existing: 'true'
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
+          release_name: ${{ github.ref }}
           draft: false
           prerelease: false
+          body: ${{ steps.extract-release-notes.outputs.release_notes }}
