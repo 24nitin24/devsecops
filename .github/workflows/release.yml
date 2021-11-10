@@ -33,7 +33,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          run: echo ${{needs.build_prod.outputs.status=='success'}}
           body: |
             Changes in this Release
             - First Change
