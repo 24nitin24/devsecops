@@ -4,14 +4,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.release.tag_name }}
-      - name: Install deps and build
-        run: npm ci && npm run build
+      - uses: fictional/releaser@v1 # Not a real action!
+        id: releaser
       - uses: JasonEtco/build-and-tag-action@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          tag_name: ${{ steps.releaser.outputs.tag_name }}
+
 
 
