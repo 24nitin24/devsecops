@@ -23,11 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_prod
     steps:
-      - uses: actions/checkout@master
-      - name: Create GitHub release
-        uses: Roang-zero1/github-create-release-action@master
-        with:
-          version_regex: '^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+'
-          update_existing: 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+
+      - name: Fetch latest release version
+        id: fetch-latest-release
+        uses: reloc8/action-latest-release-version@1.0.0
+
+      - name: Test
+        run: echo ${{ steps.fetch-latest-release.outputs.latest-release }}
