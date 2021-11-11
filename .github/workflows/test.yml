@@ -7,6 +7,6 @@ jobs:
     steps:
       - uses: Actions-R-Us/actions-tagger@95c51c646e75db5c6b7d447e3087bcee58677341
         with:
-          publish_latest: true
+          publish_latest_tag: true
         env:
           GITHUB_TOKEN: '${{secrets.GITHUB_TOKEN}}'       
