@@ -5,36 +5,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          dotnet-version: 3.1.101
-
-      - name: Build
-        run: |
-          dotnet build -c Release
-          zip -r binaries.zip ./MyProject/bin/release/netcoreapp3.1
-          zip -r otherstuff.zip ./otherstuff
-          
-      # Get the assembly version, use this as the tag.
-      # That way, to do a new release, just update the assembly version on the next commit
-      - name: Get Assembly Version
-        id: get_version
-        uses: jasondavis303/net-sdk-proj-file-version@v1.0.1
-        with: 
-          PROJ_FILE: MyProject/MyProject.csproj        
-      
-      - name: Tag and Release
-        uses: jasondavis303/tag-and-release-and-upload@v1.2.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          
-          # Use the version from the previous step
-          version: v${{ steps.get_version.outputs.ASSEMBLY_VERSION }}
-          
-          assets: '[ "binaries.zip", "otherstuff.zip" ]'
-          overwrite: false          
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false         
